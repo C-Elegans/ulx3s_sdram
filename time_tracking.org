@@ -1,0 +1,11 @@
+* SDRAM Controller Testing
+** Testing with model
+   :LOGBOOK:
+   CLOCK: [2020-09-15 Tue 18:00]--[2020-09-15 Tue 19:00] =>  1:00
+   :END:
+   
+** Testing on board
+   :LOGBOOK:
+   CLOCK: [2020-10-01 Thu 12:45]--[2020-10-01 Thu 15:30] =>  2:45
+   :END:
+

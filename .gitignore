@@ -3,4 +3,7 @@
 *~
 *.vcd
 testbench
-
+driver_tb
+*.bit
+*.config
+*.json

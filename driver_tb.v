@@ -43,7 +43,7 @@ module driver_tb;
 	   .rst				(rst),
 	   .button			(button));
 
-   sdr ram(
+   IS42S16160 ram(
 	   // Inouts
 	   .Dq				(DRAM_DQ),
 	   // Inputs
@@ -86,12 +86,12 @@ module driver_tb;
 
 
    
-      always #10 CLOCK_50 <= ~CLOCK_50;
-   always #5 begin
+      always #7.2 CLOCK_50 <= ~CLOCK_50;
+   always #3.6 begin
       CLOCK_100 <= ~CLOCK_100;
    end
    always @(CLOCK_100) begin
-      #3
+      #2
         CLOCK_100_del_3ns <= CLOCK_100;
    end
 

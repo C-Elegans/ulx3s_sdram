@@ -5,15 +5,15 @@
 module pll
 (
     input clkin, // 25 MHz, 0 deg
-    output CLOCK_100, // 100 MHz, 0 deg
-    output CLOCK_100_del_3ns, // 100 MHz, 90 deg
-    output CLOCK_50, // 50 MHz, 0 deg
+    output CLOCK_100, // 140 MHz, 0 deg
+    output CLOCK_100_del_3ns, // 140 MHz, 90 deg
+    output CLOCK_50, // 70 MHz, 0 deg
     output locked
 );
 (* FREQUENCY_PIN_CLKI="25" *)
-(* FREQUENCY_PIN_CLKOP="100" *)
-(* FREQUENCY_PIN_CLKOS="100" *)
-(* FREQUENCY_PIN_CLKOS2="50" *)
+(* FREQUENCY_PIN_CLKOP="140" *)
+(* FREQUENCY_PIN_CLKOS="140" *)
+(* FREQUENCY_PIN_CLKOS2="70" *)
 (* ICP_CURRENT="12" *) (* LPF_RESISTOR="8" *) (* MFG_ENABLE_FILTEROPAMP="1" *) (* MFG_GMCREF_SEL="2" *)
 EHXPLLL #(
         .PLLRST_ENA("DISABLED"),
@@ -24,21 +24,21 @@ EHXPLLL #(
         .OUTDIVIDER_MUXB("DIVB"),
         .OUTDIVIDER_MUXC("DIVC"),
         .OUTDIVIDER_MUXD("DIVD"),
-        .CLKI_DIV(1),
+        .CLKI_DIV(5),
         .CLKOP_ENABLE("ENABLED"),
-        .CLKOP_DIV(6),
-        .CLKOP_CPHASE(2),
+        .CLKOP_DIV(4),
+        .CLKOP_CPHASE(1),
         .CLKOP_FPHASE(0),
         .CLKOS_ENABLE("ENABLED"),
-        .CLKOS_DIV(6),
-        .CLKOS_CPHASE(3),
-        .CLKOS_FPHASE(4),
+        .CLKOS_DIV(4),
+        .CLKOS_CPHASE(2),
+        .CLKOS_FPHASE(0),
         .CLKOS2_ENABLE("ENABLED"),
-        .CLKOS2_DIV(12),
-        .CLKOS2_CPHASE(2),
+        .CLKOS2_DIV(8),
+        .CLKOS2_CPHASE(1),
         .CLKOS2_FPHASE(0),
         .FEEDBK_PATH("CLKOP"),
-        .CLKFB_DIV(4)
+        .CLKFB_DIV(28)
     ) pll_i (
         .RST(1'b0),
         .STDBY(1'b0),

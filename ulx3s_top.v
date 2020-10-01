@@ -28,11 +28,11 @@ module ulx3s_top(/*AUTOARG*/
    wire 	 CLOCK_100_del_3ns;
    wire 	 CLOCK_50;
    
-   // reg [2:0] 	 rst_sync = 3'b111;
-   // always @(posedge clk)
-   //   rst_sync <= {rst_sync[1:0], btn[1]};
+   reg [2:0] 	 rst_sync = 3'b111;
+   always @(posedge CLOCK_50)
+     rst_sync <= {rst_sync[1:0], btn[1]};
    
-   wire 	 rst = btn[1];
+   wire 	 rst = rst_sync[2];
    
 
    pll pll(/*AUTOINST*/
