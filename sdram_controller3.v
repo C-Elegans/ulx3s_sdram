@@ -164,7 +164,7 @@ module sdram_controller3
    reg [15:0]        dram_dq       = 0;
    reg               dram_oe       = 0;
    
-   assign DRAM_DQ                  = dram_oe ? dram_dq : 'bZ;
+   assign DRAM_DQ                  = dram_oe ? dram_dq : 16'bZ;
    reg [15:0]        captured;
    always @(posedge CLOCK_100_del_3ns)
      captured <= DRAM_DQ;
