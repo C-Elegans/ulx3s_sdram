@@ -6,14 +6,20 @@ SDRAM experiments on the ULX3S
 ``bash synth.sh``
 
 # Programming
+## [openFPGALoader](https://github.com/trabucayre/openFPGALoader)
 Use openFPGALoader with the host computer connected
-directly to the USB1 on the ULX3S
+directly to the USB1 on the ULX3S. This can be as slow
+as 30s.
 
 ``openFPGALoader -b ulx3s -m ulx3s_top.bit``
 
-or use openocd with a JTAG capable cable connected
+## [OpenOCD](http://openocd.org/getting-openocd/)
+You may need to install the latest version of openocd
+on MacOS with ``brew install -s --HEAD openocd``.
+
+You also need a JTAG capable cable connected
 directly to the ULX3S JTAG header(which you have to
-solder on)
+solder on).
 
 Using openocd in this manner can be as fast as 3 seconds.
 
