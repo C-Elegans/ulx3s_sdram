@@ -18,3 +18,12 @@ solder on)
 Using openocd in this manner can be as fast as 3 seconds.
 
 ``openocd -f ftdi-232.cfg -f ecp5.cfg``
+
+# Results
+
+You should observe the following values on the LEDs.
+
+ - 0x78
+ - 0x56
+ - 0x34
+ - 0x12 
