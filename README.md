@@ -17,8 +17,9 @@ as 30s.
 You may need to install the latest version of openocd
 on MacOS with ``brew install -s --HEAD openocd``.
 
-You also need a JTAG capable cable connected
-directly to the ULX3S JTAG header(which you have to
+You also need a JTAG capable cable such as this
+[one](https://www.mouser.com/ProductDetail/895-C232HM-EDHSL-0)
+connected directly to the ULX3S JTAG header(which you have to
 solder on).
 
 Using openocd in this manner can be as fast as 3 seconds.
