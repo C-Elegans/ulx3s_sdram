@@ -7,11 +7,16 @@ SDRAM experiments on the ULX3S
 
 # Programming
 ## [openFPGALoader](https://github.com/trabucayre/openFPGALoader)
-Use openFPGALoader with the host computer connected
-directly to the USB1 on the ULX3S. This can be as slow
-as 30s.
 
-``openFPGALoader -b ulx3s -m ulx3s_top.bit``
+Doing ``bash prog.sh`` programs the ULX3s over USB1
+using openFPGALoader.
+
+Due to the slow FT231 chip on the ULX3S, programming with
+openFPGALoader via the FTDI chip is quite slow.
+
+Using a JTAG cable is noticeably faster. See the next
+section.
+
 
 ## [OpenOCD](http://openocd.org/getting-openocd/)
 You may need to install the latest version of openocd
