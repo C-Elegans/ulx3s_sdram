@@ -102,30 +102,34 @@ module testbench;
    initial begin
       #20 rst = 0;
 
-      for(i='h1000; i< 'h1100; i = i+4) begin
 
-	 @(posedge clk_50);
-	 address = i;
-	 
-	 data_in = i | i << 16;
-	 req_write = 1;
-	 # 20 req_write = 0;
-	 @(posedge write_complete);
-      end
-      for(i='h1000; i< 'h1100; i = i+4) begin
+      @(posedge clk_50);
+      address = 'h1000;
 
-	 @(posedge clk_50);
-	 address = i;
-	 
-	 req_read = 1;
-	 # 20 req_read = 0;
-	 @(posedge data_valid);
-	 if(data_out != (i | i<<16)) begin
-	    $display("Assertion failed");
-	    $finish;
-	 end
-	 
-      end
+      data_in = 32'hdeadbeef;
+      req_write = 1;
+      # 20 req_write = 0;
+      @(posedge write_complete);
+
+      @(posedge clk_50);
+      address = 'h1000;
+      
+      req_read = 1;
+      # 20 req_read = 0;
+      @(posedge data_valid);
+
+      @(posedge clk_50);
+      address = 'h1001;
+      
+      req_read = 1;
+      # 20 req_read = 0;
+      @(posedge data_valid);
+      @(posedge clk_50);
+      address = 'h1002;
+      
+      req_read = 1;
+      # 20 req_read = 0;
+      @(posedge data_valid);
    end
    
    
