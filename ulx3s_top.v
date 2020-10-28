@@ -42,7 +42,7 @@ module ulx3s_top(/*AUTOARG*/
 	   .CLOCK_50			(CLOCK_50),
 	   .locked			(locked),
 	   // Inputs
-	   .clkin			(clkin));
+	   .clkin			(clk_25mhz));
 
    top top(
 	   // Outputs
