@@ -154,9 +154,11 @@ module sdram_controller3
    assign DRAM_CLK                 = CLOCK_100_del_3ns;
    assign DRAM_CKE                 = 1;
 
-   wire [12:0]       addr_row      = address[23:11];
-   wire [1:0]        addr_bank     = address[10:9];
-   wire [9:0]        addr_col      = {address [8:0],1'b0};
+   wire [12:0]       addr_row;
+   wire [1:0]        addr_bank;
+   wire [9:0]        addr_col;
+
+   assign {addr_row, addr_bank, addr_col} = {address, 1'b0};
    
 
    reg               wr_pending    = 0;
