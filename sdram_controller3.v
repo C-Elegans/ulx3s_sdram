@@ -156,7 +156,7 @@ module sdram_controller3
 
    wire [12:0]       addr_row;
    wire [1:0]        addr_bank;
-   wire [9:0]        addr_col;
+   wire [8:0]        addr_col;
 
    assign {addr_row, addr_bank, addr_col} = {address, 1'b0};
    

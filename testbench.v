@@ -1,6 +1,8 @@
 `timescale 1ns/1ps
 module testbench;
    `include "sdr_parameters.vh"
+   localparam ADDR_MAX = 1<<20;
+   
 
 
    wire [DQ_BITS-1:0]	Dq;			// To/From ram of sdr.v
@@ -95,41 +97,40 @@ module testbench;
       $dumpfile("dump.vcd");
       $dumpvars;
 
-      #200000 $finish;
    end
 
    integer i;
    initial begin
       #20 rst = 0;
 
+      for(i=0; i<ADDR_MAX; i++)begin
+	 @(posedge clk_50);
+	 address = i;
 
-      @(posedge clk_50);
-      address = 'h1000;
+	 data_in = i;
+	 req_write = 1;
+	 # 20 req_write = 0;
+	 @(posedge write_complete);
+      end
 
-      data_in = 32'hdeadbeef;
-      req_write = 1;
-      # 20 req_write = 0;
-      @(posedge write_complete);
+      for(i=0; i<ADDR_MAX; i++) begin
+	 @(posedge clk_50);
+	 address = i;
+	 
+	 req_read = 1;
+	 # 20 req_read = 0;
+	 @(posedge data_valid);
+	 #10;
+	 
+	 if (data_out != i) begin
+	    $display("Assert failed: Expected %d got %d", i, data_out);
+	    # 100 $finish;
+	    
+	 end
+	 
+      end
 
-      @(posedge clk_50);
-      address = 'h1000;
-      
-      req_read = 1;
-      # 20 req_read = 0;
-      @(posedge data_valid);
-
-      @(posedge clk_50);
-      address = 'h1001;
-      
-      req_read = 1;
-      # 20 req_read = 0;
-      @(posedge data_valid);
-      @(posedge clk_50);
-      address = 'h1002;
-      
-      req_read = 1;
-      # 20 req_read = 0;
-      @(posedge data_valid);
+      $finish;
    end
    
    
