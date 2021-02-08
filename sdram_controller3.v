@@ -7,29 +7,30 @@
 
 module sdram_controller3
   (
-   input             CLOCK_50,
-   input             CLOCK_100,
-   input             CLOCK_100_del_3ns,
-   input             rst,
+   input 	     CLOCK_50,
+   input 	     CLOCK_100,
+   input 	     CLOCK_100_del_3ns,
+   input 	     rst,
                                 
    input [23:0]      address,
-   input             req_read,
-   input             req_write,
+   input 	     req_read,
+   input 	     req_write,
    input [31:0]      data_in,
+   input [3:0] 	     write_mask,
    output reg [31:0] data_out,
-   output reg        data_valid= 0,
-   output reg        write_complete= 0,
+   output reg 	     data_valid= 0,
+   output reg 	     write_complete= 0,
                                
    output reg [12:0] DRAM_ADDR,
    output reg [1:0]  DRAM_BA,
-   output reg        DRAM_CAS_N,
-   output            DRAM_CKE,
-   output            DRAM_CLK,
-   output reg        DRAM_CS_N,
+   output reg 	     DRAM_CAS_N,
+   output 	     DRAM_CKE,
+   output 	     DRAM_CLK,
+   output reg 	     DRAM_CS_N,
    inout [15:0]      DRAM_DQ,
    output reg [1:0]  DRAM_DQM,
-   output reg        DRAM_RAS_N,
-   output reg        DRAM_WE_N);
+   output reg 	     DRAM_RAS_N,
+   output reg 	     DRAM_WE_N);
 
    localparam [3:0] cmd_nop        = 4'b0111;
    localparam [3:0] cmd_read       = 4'b0101;
@@ -291,13 +292,14 @@ always @(posedge CLOCK_100)begin
         dram_dq    <= data_in[15:0];
         dram_oe    <= 1;
         DRAM_BA    <= addr_bank;
-        DRAM_DQM   <= 0;
+        DRAM_DQM   <= ~write_mask[1:0];
      end // case: s_wr0[8:4]
      
      s_wr1[8:4]:begin
         DRAM_ADDR <= addr_col + 1;
         state   <= s_wr2;
         dram_dq <= data_in[31:16];
+        DRAM_DQM   <= ~write_mask[3:2];
      end
      s_wr2[8:4]:begin
         state          <= s_wr3;
